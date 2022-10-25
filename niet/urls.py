@@ -22,6 +22,7 @@ from rest_framework import routers
 from niet.quickstart import views
 
 # Redirect for favicon
+# FIXME: fix favicon display
 favicon_view = RedirectView.as_view(url=staticfiles_storage.url('favicon.ico'), permanent=True)
 
 # Wire up our API using automatic URL routing.
@@ -37,5 +38,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
 
+
+    # TODO: custom favicon for each project in portfolio
     re_path('favicon.ico', favicon_view),
 ]
