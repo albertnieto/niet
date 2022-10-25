@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'portfolio',
+    'niet.portfolio',
 ]
 
 MIDDLEWARE = [
@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'niet.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'niet_db',
+        'USER': 'postgres',
+        'PASSWORD': 'hafasidi',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
