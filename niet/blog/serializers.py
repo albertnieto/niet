@@ -8,6 +8,11 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         fields = [
             'url', 'username', 'email', 'groups'
         ]
+        # Access instance by username instead of pk
+        lookup_field = 'username'
+        extra_kwargs = {
+            'url': {'lookup_field': 'username'}
+        }
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
