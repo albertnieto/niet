@@ -8,7 +8,8 @@ from django.urls import include, path, re_path
 from django.views.generic.base import RedirectView
 from django.contrib.staticfiles.storage import staticfiles_storage
 from rest_framework import routers
-from niet.blog import views
+from niet.blog import views as blog_views
+from niet.portfolio import views as portfolio_views
 
 # Redirect for favicon
 # FIXME: fix favicon display
@@ -16,15 +17,17 @@ favicon_view = RedirectView.as_view(url=staticfiles_storage.url('favicon.ico'), 
 
 # Wire up our API using automatic URL routing.
 router = routers.DefaultRouter()
-router.register('users', views.UserViewSet)
-router.register('groups', views.GroupViewSet)
+router.register('users', blog_views.UserViewSet)
+router.register('groups', blog_views.GroupViewSet)
+router.register('posts', blog_views.GroupViewSet)
+router.register('tags', portfolio_views.TagViewSet)
+router.register('projects', portfolio_views.ProjectViewSet)
 
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
-
 
     # TODO: custom favicon for each project in portfolio
     re_path('favicon.ico', favicon_view),
