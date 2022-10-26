@@ -5,7 +5,6 @@ The `urlpatterns` list routes URLs to views. For more information please see:
 """
 from django.contrib import admin
 from django.urls import include, path, re_path
-from django.views import debug
 from django.views.generic.base import RedirectView
 from django.contrib.staticfiles.storage import staticfiles_storage
 from rest_framework import routers
@@ -17,8 +16,8 @@ favicon_view = RedirectView.as_view(url=staticfiles_storage.url('favicon.ico'), 
 
 # Wire up our API using automatic URL routing.
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
+router.register('users', views.UserViewSet)
+router.register('groups', views.GroupViewSet)
 
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
