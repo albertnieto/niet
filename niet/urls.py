@@ -8,7 +8,7 @@ from django.urls import include, path, re_path
 from django.views.generic.base import RedirectView
 from django.contrib.staticfiles.storage import staticfiles_storage
 from rest_framework import routers
-from niet.quickstart import views
+from niet.blog import views
 
 # Redirect for favicon
 # FIXME: fix favicon display
