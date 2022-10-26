@@ -4,7 +4,7 @@ from django.db import models
 
 # Create your models here.
 
-class Tags(models.Model):
+class Tag(models.Model):
     name = models.TextField(max_length=20)
 
 class Project(models.Model):
@@ -16,7 +16,7 @@ class Project(models.Model):
 
     title = models.CharField(max_length=50)
     description = models.TextField()
-    tags = models.ManyToManyField(Tags)
+    tags = models.ManyToManyField(Tag)
     image = models.FilePathField(path="/img")
     repository = models.URLField()
 
