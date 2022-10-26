@@ -1,3 +1,6 @@
 from django.contrib import admin
+from niet.portfolio.models import *
 
-# Register your models here.
+# Each class must be in a seperate line
+admin.site.register(Project)
+admin.site.register(Tag)
