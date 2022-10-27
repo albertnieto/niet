@@ -1,5 +1,4 @@
-from django.contrib.auth.models import User, Group
-from niet.blog.models import Post
+from niet.blog.models import Post, User, Group
 from rest_framework import serializers
 
 
