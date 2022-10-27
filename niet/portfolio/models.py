@@ -17,7 +17,7 @@ class Project(models.Model):
         ON_HIATUS = 'On hiatus'
         FINISHED = 'Finished'
 
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=50, unique=True)
     description = models.TextField()
     tags = models.ManyToManyField(Tag)
     image = models.FilePathField(path="static/projects/img", null=True, blank=True)
