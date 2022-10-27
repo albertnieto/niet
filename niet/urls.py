@@ -11,15 +11,15 @@ from rest_framework import routers
 from niet.blog import views as blog_views
 from niet.portfolio import views as portfolio_views
 
-# Redirect for favicon
-# FIXME: fix favicon display
+# TODO: custom favicon for each project in portfolio
+# Redirect for modern browsers always asking for favicon
 favicon_view = RedirectView.as_view(url=staticfiles_storage.url('favicon.ico'), permanent=True)
 
 # Wire up our API using automatic URL routing.
 router = routers.DefaultRouter()
 router.register('users', blog_views.UserViewSet)
 router.register('groups', blog_views.GroupViewSet)
-router.register('posts', blog_views.GroupViewSet)
+router.register('posts', blog_views.PostViewSet)
 router.register('tags', portfolio_views.TagViewSet)
 router.register('projects', portfolio_views.ProjectViewSet)
 
@@ -28,9 +28,7 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
-
-    # TODO: custom favicon for each project in portfolio
-    re_path('favicon.ico', favicon_view),
+    path('favicon.ico', favicon_view),
 ]
 
 # Overriding handlers to show custom error pages
