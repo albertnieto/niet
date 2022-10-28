@@ -7,23 +7,11 @@ from django.contrib import admin
 from django.urls import include, path, re_path
 from django.views.generic.base import RedirectView
 from django.contrib.staticfiles.storage import staticfiles_storage
-from rest_framework import routers
-from niet.blog import views as blog_views
-from niet.portfolio import views as portfolio_views
+from niet.routers import router
 
 # TODO: custom favicon for each project in portfolio
 # Redirect for modern browsers always asking for favicon
 favicon_view = RedirectView.as_view(url=staticfiles_storage.url('favicon.ico'), permanent=True)
-
-# Wire up our API using automatic URL routing.
-router = routers.DefaultRouter()
-router.register('users', blog_views.UserViewSet)
-router.register('groups', blog_views.GroupViewSet)
-router.register('posts', blog_views.PostViewSet)
-router.register('comments', blog_views.CommentViewSet)
-router.register('categories', blog_views.CategoryViewSet)
-router.register('tags', portfolio_views.TagViewSet)
-router.register('projects', portfolio_views.ProjectViewSet)
 
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
