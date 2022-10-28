@@ -20,6 +20,7 @@ router = routers.DefaultRouter()
 router.register('users', blog_views.UserViewSet)
 router.register('groups', blog_views.GroupViewSet)
 router.register('posts', blog_views.PostViewSet)
+router.register('comments', blog_views.CommentViewSet)
 router.register('tags', portfolio_views.TagViewSet)
 router.register('projects', portfolio_views.ProjectViewSet)
 
