@@ -3,6 +3,7 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from niet.blog.serializers import *
 from niet.blog.models import *
+from niet.blog.permissions import IsOwnerOrReadOnly
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -31,9 +32,14 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (permissions.IsAdminUser,)
+    permission_classes_by_action = {
+        'detail': [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly],
+        'list': [permissions.IsAdminUser]
+    }
     # Access instance by username instead of pk
-    lookup_field = 'username'
+    lookup_field = 'id'
     
     # Override the default perform_create function to set the owner field to the current user
     def perform_create(self, serializer):
+        print(self.request.user,'\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
         serializer.save(owner=self.request.user)

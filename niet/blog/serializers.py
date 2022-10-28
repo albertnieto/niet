@@ -4,6 +4,7 @@ from rest_framework import serializers
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     # When returning users, posts will be shown as urls
+    # FIXME: Not working
     posts = serializers.HyperlinkedRelatedField(
         many=True, 
         read_only=True,
@@ -38,5 +39,10 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Post
         fields = [
-            'url', 'id', 'title', 'body', 'owner', 'slug'
+            'url', 'id', 'title', 'body', 'owner'
         ]
+        # Access instance by id instead of pk
+        lookup_field = 'id'
+        extra_kwargs = {
+            'url': {'lookup_field': 'id'}
+        }

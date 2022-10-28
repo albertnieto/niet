@@ -21,7 +21,7 @@ class Group(Group):
     description = models.CharField(max_length=180,null=True, blank=True)
 
 class Post(models.Model):
-    id = models.CharField(max_length=11, unique=True, primary_key=True, default=random_id_field)
+    id = models.CharField(max_length=20, unique=True, primary_key=True, default=random_id_field)
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100)
     body = models.TextField()
