@@ -37,7 +37,7 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-class Comment (models.Model):
+class Comment(models.Model):
     id = models.CharField(max_length=20, unique=True, primary_key=True, default=random_id_field)
     # DateField only includes date
     created = models.DateTimeField(auto_now_add=True)
@@ -47,3 +47,11 @@ class Comment (models.Model):
 
     class Meta:
         ordering = ['created']
+
+class Category(models.Model):
+    name = models.CharField(max_length=50, blank=False)
+    posts = models.ManyToManyField('Post', related_name='categories', blank=True)
+
+    class Meta:
+        # This avoids pluralizing category as categorys
+        verbose_name_plural = 'categories'

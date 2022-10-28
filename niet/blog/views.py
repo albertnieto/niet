@@ -35,7 +35,7 @@ class PostViewSet(viewsets.ModelViewSet):
         'detail': [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly],
         'list': [permissions.IsAdminUser]
     }
-    # Access instance by username instead of pk
+    # Access instance by id instead of pk
     lookup_field = 'id'
     
     # Override the default perform_create function to set the owner field to the current user
@@ -48,14 +48,27 @@ class CommentViewSet(viewsets.ModelViewSet):
     """
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes = (permissions.IsAdminUser,)
     permission_classes_by_action = {
         'detail': [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly],
         'list': [permissions.IsAdminUser]
     }
-    # Access instance by username instead of pk
+    # Access instance by id instead of pk
     lookup_field = 'id'
     
     # Override the default perform_create function to set the owner field to the current user
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes_by_action = {
+        'detail': [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly],
+        'list': [permissions.IsAdminUser]
+    }
+
+    # Access instance by username instead of pk
+    lookup_field = 'name'
+
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
