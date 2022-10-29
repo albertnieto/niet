@@ -11,14 +11,16 @@ from api.routers import router
 
 # TODO: custom favicon for each project in portfolio
 # Redirect for modern browsers always asking for favicon
-favicon_view = RedirectView.as_view(url=staticfiles_storage.url('favicon.ico'), permanent=True)
+favicon_view = RedirectView.as_view(
+    url=staticfiles_storage.url("favicon.ico"), permanent=True
+)
 
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('admin/', admin.site.urls),
-    path('favicon.ico', favicon_view),
+    path("", include(router.urls)),
+    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+    path("admin/", admin.site.urls),
+    path("favicon.ico", favicon_view),
 ]
 
 # Overriding handlers to show custom error pages

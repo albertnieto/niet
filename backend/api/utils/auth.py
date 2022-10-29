@@ -1,2 +1,2 @@
 def admin_check(user):
-   return user.is_superuser
+    return user.is_superuser
