@@ -1,5 +1,3 @@
-from email.policy import default
-from random import choices
 from django.db import models
 
 # Create your models here.
@@ -22,7 +20,11 @@ class Project(models.Model):
     title = models.CharField(max_length=50, unique=True)
     description = models.TextField()
     tags = models.ManyToManyField(Tag)
-    image = models.FilePathField(path="static/projects/img", null=True, blank=True)
+    image = models.FilePathField(
+        path="static/projects/img",
+        null=True,
+        blank=True
+    )
     repository = models.URLField(null=True, blank=True)
 
     status = models.CharField(

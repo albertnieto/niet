@@ -37,7 +37,10 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = bm.Post.objects.all()
     serializer_class = bs.PostSerializer
     permission_classes_by_action = {
-        "detail": [permissions.IsAuthenticatedOrReadOnly, bp.IsOwnerOrReadOnly],
+        "detail": [
+            permissions.IsAuthenticatedOrReadOnly,
+            bp.IsOwnerOrReadOnly
+        ],
         "list": [permissions.IsAdminUser],
     }
     # Access instance by id instead of pk
@@ -57,7 +60,10 @@ class CommentViewSet(viewsets.ModelViewSet):
     queryset = bm.Comment.objects.all()
     serializer_class = bs.CommentSerializer
     permission_classes_by_action = {
-        "detail": [permissions.IsAuthenticatedOrReadOnly, bp.IsOwnerOrReadOnly],
+        "detail": [
+            permissions.IsAuthenticatedOrReadOnly,
+            bp.IsOwnerOrReadOnly
+        ],
         "list": [permissions.IsAdminUser],
     }
     # Access instance by id instead of pk
@@ -73,7 +79,10 @@ class CategoryViewSet(viewsets.ModelViewSet):
     queryset = bm.Category.objects.all()
     serializer_class = bs.CategorySerializer
     permission_classes_by_action = {
-        "detail": [permissions.IsAuthenticatedOrReadOnly, bp.IsOwnerOrReadOnly],
+        "detail": [
+            permissions.IsAuthenticatedOrReadOnly,
+            bp.IsOwnerOrReadOnly
+        ],
         "list": [permissions.IsAdminUser],
     }
 

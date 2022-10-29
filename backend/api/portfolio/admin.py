@@ -1,6 +1,6 @@
 from django.contrib import admin
-from api.portfolio.models import *
+import api.portfolio.models as pm
 
 # Each class must be in a seperate line
-admin.site.register(Project)
-admin.site.register(Tag)
+admin.site.register(pm.Project)
+admin.site.register(pm.Tag)

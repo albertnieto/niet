@@ -1,6 +1,7 @@
 from secrets import token_urlsafe
 from random import randint
 
+
 # Use of secrets libray to create an urlsafe ID
 def random_id_field(nbytes=7):
     return token_urlsafe(nbytes)

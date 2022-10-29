@@ -1,5 +1,4 @@
 from api.portfolio.models import Tag, Project
-from django.contrib.auth.decorators import user_passes_test
 from rest_framework import viewsets
 from rest_framework import permissions
 from api.portfolio.serializers import TagSerializer, ProjectSerializer
