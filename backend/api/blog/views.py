@@ -69,6 +69,3 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
     # Access instance by username instead of pk
     lookup_field = 'name'
-
-    def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)

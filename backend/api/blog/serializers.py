@@ -4,7 +4,7 @@ from rest_framework import serializers
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     # When returning users, posts will be shown as urls
-    # FIXME: Not working
+    # FIXME: Not showing up in response
     posts = serializers.HyperlinkedRelatedField(
         # Queryset contains mutiple items (a list of items)
         many=True, 

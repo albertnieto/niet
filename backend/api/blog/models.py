@@ -49,7 +49,7 @@ class Comment(models.Model):
         ordering = ['created']
 
 class Category(models.Model):
-    name = models.CharField(max_length=50, blank=False)
+    name = models.CharField(max_length=50, unique=True, blank=False)
     posts = models.ManyToManyField('Post', related_name='categories', blank=True)
 
     class Meta:
