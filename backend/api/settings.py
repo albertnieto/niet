@@ -22,7 +22,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DB_NAME')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# FIXME: If false, css is not working
 DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -110,8 +109,24 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Pagination allows you to control how many objects per page are returned
+# Disable browseable HTML for production
+DEFAULT_RENDERER_CLASSES = (
+    'rest_framework.renderers.JSONRenderer',
+)
+
+# Enable browseable HTML for dev
+if DEBUG:
+    DEFAULT_RENDERER_CLASSES = DEFAULT_RENDERER_CLASSES + (
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    )
+
 REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': DEFAULT_RENDERER_CLASSES,
+    # Set endpoints to be read only unless authenticated
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ),
+    # Pagination allows you to control how many objects per page are returned
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
 }
