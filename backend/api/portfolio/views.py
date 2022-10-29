@@ -1,8 +1,8 @@
-from niet.portfolio.models import Tag, Project
+from api.portfolio.models import Tag, Project
 from django.contrib.auth.decorators import user_passes_test
 from rest_framework import viewsets
 from rest_framework import permissions
-from niet.portfolio.serializers import TagSerializer, ProjectSerializer
+from api.portfolio.serializers import TagSerializer, ProjectSerializer
 
 class TagViewSet(viewsets.ModelViewSet):
     """

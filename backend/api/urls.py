@@ -7,7 +7,7 @@ from django.contrib import admin
 from django.urls import include, path, re_path
 from django.views.generic.base import RedirectView
 from django.contrib.staticfiles.storage import staticfiles_storage
-from niet.routers import router
+from api.routers import router
 
 # TODO: custom favicon for each project in portfolio
 # Redirect for modern browsers always asking for favicon
@@ -22,7 +22,7 @@ urlpatterns = [
 ]
 
 # Overriding handlers to show custom error pages
-handler400 = "niet.views.bad_request_view"
-handler403 = "niet.views.permission_denied_view"
-handler404 = "niet.views.page_not_found_view"
-handler500 = "niet.views.server_error_view"
+handler400 = "api.views.bad_request_view"
+handler403 = "api.views.permission_denied_view"
+handler404 = "api.views.page_not_found_view"
+handler500 = "api.views.server_error_view"

@@ -1,6 +1,6 @@
 from rest_framework import routers
-from niet.blog import views as blog_views
-from niet.portfolio import views as portfolio_views
+from api.blog import views as blog_views
+from api.portfolio import views as portfolio_views
 
 # Wire up our API using automatic URL routing.
 # https://www.django-rest-framework.org/api-guide/routers/

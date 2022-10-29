@@ -1,4 +1,4 @@
-from niet.portfolio.models import Tag, Project
+from api.portfolio.models import Tag, Project
 from rest_framework import serializers
 
 

@@ -5,7 +5,7 @@ import django.contrib.auth.models
 from django.db import migrations, models
 import django.db.models.deletion
 import django.utils.timezone
-import niet.utils.tokens
+import api.utils.tokens
 
 
 class Migration(migrations.Migration):
@@ -54,7 +54,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Post',
             fields=[
-                ('id', models.CharField(default=niet.utils.tokens.random_id_field, max_length=20, primary_key=True, serialize=False, unique=True)),
+                ('id', models.CharField(default=api.utils.tokens.random_id_field, max_length=20, primary_key=True, serialize=False, unique=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('title', models.CharField(max_length=100)),
                 ('body', models.TextField()),
@@ -67,7 +67,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Comment',
             fields=[
-                ('id', models.CharField(default=niet.utils.tokens.random_id_field, max_length=20, primary_key=True, serialize=False, unique=True)),
+                ('id', models.CharField(default=api.utils.tokens.random_id_field, max_length=20, primary_key=True, serialize=False, unique=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('body', models.TextField()),
                 ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),

@@ -1,4 +1,4 @@
-from niet.blog.models import *
+from api.blog.models import *
 from rest_framework import serializers
 
 

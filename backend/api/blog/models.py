@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group
-from niet.utils.tokens import random_id_field
-from niet.blog.managers import UserManager
+from api.utils.tokens import random_id_field
+from api.blog.managers import UserManager
 
 #TODO: to reduce collision, rethink id
 

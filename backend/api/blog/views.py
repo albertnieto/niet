@@ -1,9 +1,9 @@
 from django.contrib.auth.decorators import user_passes_test
 from rest_framework import viewsets
 from rest_framework import permissions
-from niet.blog.serializers import *
-from niet.blog.models import *
-from niet.blog.permissions import *
+from api.blog.serializers import *
+from api.blog.models import *
+from api.blog.permissions import *
 
 class UserViewSet(viewsets.ModelViewSet):
     """

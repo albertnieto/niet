@@ -1,5 +1,5 @@
 from django.contrib import admin
-from niet.portfolio.models import *
+from api.portfolio.models import *
 
 # Each class must be in a seperate line
 admin.site.register(Project)
