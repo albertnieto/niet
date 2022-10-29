@@ -1,4 +1,3 @@
-from django.contrib.auth.decorators import user_passes_test
 from rest_framework import viewsets
 from rest_framework import permissions
 from api.blog.serializers import *
