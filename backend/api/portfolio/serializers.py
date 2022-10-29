@@ -1,10 +1,10 @@
-from api.portfolio.models import Tag, Project
+import api.portfolio.models as pm
 from rest_framework import serializers
 
 
 class TagSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Tag
+        model = pm.Tag
         fields = ["url", "name"]
         # Access instance by username instead of pk
         lookup_field = "name"
@@ -12,8 +12,14 @@ class TagSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ProjectSerializer(serializers.HyperlinkedModelSerializer):
+    tags = serializers.SlugRelatedField(
+        slug_field="name",
+        many=True,
+        queryset=pm.Tag.objects.all(),
+    )
+
     class Meta:
-        model = Project
+        model = pm.Project
         fields = [
             "url",
             "title",

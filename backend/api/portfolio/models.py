@@ -1,6 +1,9 @@
+import os
 from django.db import models
+from dotenv import load_dotenv
 
-# Create your models here.
+# Load environment variables for hidden values (eg. secret key)
+load_dotenv()
 
 
 class Tag(models.Model):
@@ -18,12 +21,13 @@ class Project(models.Model):
         FINISHED = "Finished"
 
     title = models.CharField(max_length=50, unique=True)
-    description = models.TextField()
-    tags = models.ManyToManyField(Tag)
-    image = models.FilePathField(
-        path="static/projects/img",
+    description = models.TextField(blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
+    # FilePathField are for already uploaded files
+    image = models.ImageField(
+        upload_to=os.environ.get("IMG_PATH"),
         null=True,
-        blank=True
+        blank=True,
     )
     repository = models.URLField(null=True, blank=True)
 
