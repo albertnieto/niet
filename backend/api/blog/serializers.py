@@ -1,88 +1,90 @@
-from api.blog.models import *
+import api.blog.models as bm
 from rest_framework import serializers
+from django.utils.timezone import now
 
 
+# When returning users, posts will be shown as urls
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    # When returning users, posts will be shown as urls
-    # FIXME: Not showing up in response
-    posts = serializers.HyperlinkedRelatedField(
-        # Queryset contains mutiple items (a list of items)
-        many=True, 
-        read_only=True,
-        view_name = 'post-detail'
+    # Can't use StringRelatedField or HyperlinkedIdentityField
+    # because they are read only
+    groups = serializers.SlugRelatedField(
+        slug_field="name",
+        many=True,
+        queryset=bm.Group.objects.all(),
     )
 
-    comments = serializers.HyperlinkedRelatedField(
-        many=True, 
-        read_only=True,
-        view_name = 'comment-detail'
-    )
+    days_since_joined = serializers.SerializerMethodField()
 
     class Meta:
-        model = User
+        model = bm.User
         fields = [
-            'url', 'username', 'email', 'groups', 'posts', 'comments'
+            "url", "username", "email", "website",
+            "groups", "days_since_joined"
         ]
         # Access instance by username instead of pk
-        lookup_field = 'username'
-        extra_kwargs = {
-            'url': {'lookup_field': 'username'}
-        }
+        lookup_field = "username"
+        extra_kwargs = {"url": {"lookup_field": "username"}}
+
+    def get_days_since_joined(self, obj):
+        return (now() - obj.date_joined).days
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Group
-        fields = ['url', 'name']
+        model = bm.Group
+        fields = ["url", "name", "description"]
         # Access instance by username instead of pk
-        lookup_field = 'name'
-        extra_kwargs = {
-            'url': {'lookup_field': 'name'}
-        }
+        lookup_field = "name"
+        extra_kwargs = {"url": {"lookup_field": "name"}}
+
 
 class PostSerializer(serializers.HyperlinkedModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
+    id = serializers.ReadOnlyField()
+    owner = serializers.ReadOnlyField(source="owner.username")
     comments = serializers.PrimaryKeyRelatedField(
-        many=True, 
+        many=True,
         read_only=True,
     )
 
-    categories = serializers.PrimaryKeyRelatedField(
-        many=True, 
-        queryset=Category.objects.all()
+    categories = serializers.SlugRelatedField(
+        slug_field="name",
+        many=True,
+        queryset=bm.Category.objects.all(),
     )
 
     class Meta:
-        model = Post
+        model = bm.Post
         fields = [
-            'url', 'id', 'title', 'body', 'owner', 
-            'comments', 'categories'
+            "url", "id", "title", "body", "owner", "comments", "categories"
         ]
         # Access instance by id instead of pk
-        lookup_field = 'id'
-        extra_kwargs = {
-            'url': {'lookup_field': 'id'}
-        }
+        lookup_field = "id"
+        extra_kwargs = {"url": {"lookup_field": "id"}}
 
-class CommentSerializer(serializers.HyperlinkedModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.username')
-    # By adding post to meta fields, by default it is serialized like, add to customize
-    #post = serializers.PrimaryKeyRelatedField(queryset=Post.objects.all())
 
-    class Meta:
-        model = Comment
-        fields = [
-            'url', 'id', 'body', 'owner', 'post'
-        ]
-        
-class CategorySerializer(serializers.ModelSerializer):
-    posts = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
+class CommentSerializer(serializers.ModelSerializer):
+    id = serializers.ReadOnlyField()
+    owner = serializers.ReadOnlyField(source="owner.username")
+    # By adding post to meta fields, by default it is serialized like
+    # post = serializers.PrimaryKeyRelatedField(queryset=Post.objects.all())
+
+    # FIXME
+    # reply_count = serializers.SerializerMethodField()
 
     class Meta:
-        model = Category
-        fields = ['id', 'name', 'posts']
+        model = bm.Comment
+        fields = ["id", "body", "owner", "post"]
+
+    def get_reply_count(self, obj):
+        if obj.is_parent:
+            return obj.children().count()
+        return 0
+
+
+class CategorySerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = bm.Category
+        fields = ["url", "name"]
         # Access instance by name instead of pk
-        lookup_field = 'name'
-        extra_kwargs = {
-            'url': {'lookup_field': 'name'}
-        }
+        lookup_field = "name"
+        extra_kwargs = {"url": {"lookup_field": "name"}}
