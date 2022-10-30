@@ -34,6 +34,7 @@ if not DEBUG:
 
 INSTALLED_APPS = [
     "django.contrib.admin",
+    "django.contrib.admindocs",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "drf_spectacular",
+
     # Web apps
     "api.portfolio",
     "api.blog",
@@ -105,6 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME":
             "django.contrib.auth.password_validation.MinimumLengthValidator",
+
         # Options are given to the validator constructor
         'OPTIONS': {
             'min_length': 9,
@@ -130,26 +133,28 @@ if DEBUG:
     )
 
 REST_FRAMEWORK = {
-    "DEFAULT_RENDERER_CLASSES": DEFAULT_RENDERER_CLASSES,
     # Set endpoints to be read only unless authenticated
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.IsAuthenticatedOrReadOnly",
     ),
+
+    # Generate schema from drf spectacular class
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+
     # Pagination allows you to control how many objects per page are returned
     "DEFAULT_PAGINATION_CLASS":
         "rest_framework.pagination.PageNumberPagination",
+
     "PAGE_SIZE": 10,
+    "DEFAULT_RENDERER_CLASSES": DEFAULT_RENDERER_CLASSES,
 }
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "UTC"
-
 USE_I18N = True
-
 USE_TZ = True
 
 # Use our custom User model instead of the default one
@@ -159,7 +164,9 @@ AUTH_USER_MODEL = "blog.User"
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
+
 # Letting know we have created a static folder
+
 STATIC_ROOT = ""
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 

@@ -9,19 +9,30 @@ This essentially “roots” a set of URLs below other ones.
 drf_urlconf includes urls from django rest framework
 router_urlconf includes urls from the viewsets of this project
 """
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularSwaggerView
+)
 from django.contrib import admin
 from django.urls import include, path
 from api.views import favicon_view
 from api.routers import router
 
 
-drf_urlconf = include("rest_framework.urls", namespace="rest_framework")
-router_urlconf = include(router.urls)
-
 urlpatterns = [
-    path("", router_urlconf),
-    path("api-auth/", drf_urlconf),
+    path("", include(router.urls)),
+    path('admin/doc/', include('django.contrib.admindocs.urls')),
     path("admin/", admin.site.urls),
+    path(
+        "api/auth/",
+        include("rest_framework.urls", namespace="rest_framework")
+    ),
+    path("api/schema/", SpectacularAPIView.as_view(), name="api-schema"),
+    path(
+        "api/docs/",
+        SpectacularSwaggerView.as_view(url_name="api-schema"),
+        name="api-docs"
+    ),
     path("favicon.ico", favicon_view),
 ]
 
