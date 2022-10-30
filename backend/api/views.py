@@ -1,4 +1,12 @@
 from django.shortcuts import render
+from django.views.generic.base import RedirectView
+from django.contrib.staticfiles.storage import staticfiles_storage
+
+# TODO: custom favicon for each project in portfolio
+# Redirect for modern browsers always asking for favicon
+favicon_view = RedirectView.as_view(
+    url=staticfiles_storage.url("favicon.ico"), permanent=True
+)
 
 
 def bad_request_view(request, exception):

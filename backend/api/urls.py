@@ -2,23 +2,25 @@
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
+
+Urlpatterns can “include” other URLconf modules.
+This essentially “roots” a set of URLs below other ones.
+
+drf_urlconf includes urls from django rest framework
+router_urlconf includes urls from the viewsets of this project
 """
 from django.contrib import admin
-from django.urls import include, path, re_path
-from django.views.generic.base import RedirectView
-from django.contrib.staticfiles.storage import staticfiles_storage
+from django.urls import include, path
+from api.views import favicon_view
 from api.routers import router
 
-# TODO: custom favicon for each project in portfolio
-# Redirect for modern browsers always asking for favicon
-favicon_view = RedirectView.as_view(
-    url=staticfiles_storage.url("favicon.ico"), permanent=True
-)
 
-# Additionally, we include login URLs for the browsable API.
+drf_urlconf = include("rest_framework.urls", namespace="rest_framework")
+router_urlconf = include(router.urls)
+
 urlpatterns = [
-    path("", include(router.urls)),
-    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+    path("", router_urlconf),
+    path("api-auth/", drf_urlconf),
     path("admin/", admin.site.urls),
     path("favicon.ico", favicon_view),
 ]
