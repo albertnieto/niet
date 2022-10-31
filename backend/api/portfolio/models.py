@@ -2,8 +2,11 @@ import os
 from django.db import models
 from dotenv import load_dotenv
 
+# For deployment, specify the path of the dot env
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+
 # Load environment variables for hidden values (eg. secret key)
-load_dotenv()
+load_dotenv(dotenv_path)
 
 
 class Tag(models.Model):
