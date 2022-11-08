@@ -49,6 +49,8 @@ export default class InitialScene {
       antialias: true,
     });
     this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.shadowMap.enabled = true;
+    this.renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
     // this.renderer.shadowMap.enabled = true;
     document.body.appendChild(this.renderer.domElement);
 
@@ -59,7 +61,7 @@ export default class InitialScene {
 
     // 4. create light
     // Ambient light globally illuminates all objects in the scene equally
-    this.ambientLight = new THREE.AmbientLight(0x121212, 0.5);
+    this.ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
     this.ambientLight.castShadow = false;
     this.scene.add(this.ambientLight);
 
@@ -67,7 +69,7 @@ export default class InitialScene {
     this.directionalLight = new THREE.DirectionalLight(0xffffff, 1);
     this.directionalLight.castShadow = false;
     this.directionalLight.position.set(0, 32, 64);
-    this.scene.add(this.directionalLight);
+    //this.scene.add(this.directionalLight);
 
     // 5. add resize listener
     window.addEventListener('resize', () => this.onWindowResize(), false);
