@@ -1,12 +1,14 @@
-import { render } from 'react-dom'
-import { StrictMode, Suspense } from 'react'
-import { Loader } from '@react-three/drei'
-import './styles.css'
-import App from './App'
+import React, { StrictMode, Suspense } from 'react';
+import ReactDOM from "react-dom/client";
+import './styles.css';
+import App from './App';
 
-render(
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
+  <StrictMode>
     <Suspense fallback={null}>
       <App />
-    </Suspense>,
-  document.getElementById('root'),
-)
+    </Suspense>
+  </StrictMode>
+);
