@@ -1,30 +1,18 @@
-import { useState } from 'react'
-import { useEffect } from 'react'
-import * as THREE from 'three'
-import { GLTFLoader  } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import './App.css'
-import InitialScene from './components/threejs/initialScene'
+import * as THREE from "three";
 
-function App() {
-  // useState allows functional components to have state
-  const [count, setCount] = useState(0)
-  
-  // useEffect allows functional components to have lifecycle methods
-  useEffect(() => {
-    const background = new InitialScene('background');
-    background.initialize();
-    background.animate();
+import React, { useEffect } from "react";
+import { Canvas, useThree, extend } from '@react-three/fiber'
+import { OrbitControls, PresentationControls } from '@react-three/drei'
 
+import Office from './components/Office'
 
-  }, []);
-
+export default function App() {
   return (
-    <div>
-      <canvas id="background">
-        <h1>Albert Nieto</h1>
-      </canvas>
-    </div>
+    <Canvas>
+      <OrbitControls />
+      <color attach="background" args={['#121212']} />
+      <spotLight position={[5, 5, 2]} angle={0.15} penumbra={0.3} />
+      <Office />
+    </Canvas>
   )
 }
-
-export default App
