@@ -667,5 +667,3 @@ export default function Office(props) {
     </group>
   );
 }
-
-useGLTF.preload("/Office2.glb");
