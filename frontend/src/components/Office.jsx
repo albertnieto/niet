@@ -5,22 +5,22 @@ import { useFrame } from '@react-three/fiber'
 import { useGLTF, useScroll } from "@react-three/drei";
 
 const cameraPositionCurve = new THREE.CatmullRomCurve3([
-  new Vector3(-8, 1, 7),
-  new Vector3(-8, 1, 7),
+  new Vector3(1, 2, 0),
+  new Vector3(2, 2, -2),
   new Vector3(-8, 1, 7),
   new Vector3(0, 5, 5),
   new Vector3(1, 6, 5),
   new Vector3(5, 3, 3),
-  new Vector3(6, 2, -8)
+  new Vector3(6, 2, -8),
 ])
 const cameraLookAtCurve = new THREE.CatmullRomCurve3([
   new Vector3(0, 0, 0),
-  new Vector3(0, 0, -6),
-  new Vector3(0, 0, -6),
-  new Vector3(0, 6, 2),
-  new Vector3(0, 6, 0),
-  new Vector3(0, 0, -6),
-  new Vector3(0, -2, -3)
+  new Vector3(0, 0, 0),
+  new Vector3(0, 0, 0),
+  new Vector3(0, 0, 0),
+  new Vector3(0, 0, 0),
+  new Vector3(0, 0, 0),
+  new Vector3(0, 0, 0),
 ])
 const cameraLookAt = new Vector3(0, 0, 0)
 
