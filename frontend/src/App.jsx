@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Canvas } from '@react-three/fiber'
-import { ScrollControls } from '@react-three/drei'
+import { useGLTF, ScrollControls } from '@react-three/drei'
 import Office from './components/Office'
 import Html from './components/Html'
 import LoadingScreen from './components/Loading'
@@ -28,8 +28,8 @@ function OfficeCanvas() {
 }
 
 export default function App() {
-
   const [loading, setLoading] = useState(true);
+  useGLTF.preload("/Office.glb");
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 3000)
