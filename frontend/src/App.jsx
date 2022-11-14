@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Canvas } from '@react-three/fiber'
 import { ScrollControls } from '@react-three/drei'
 import Office from './components/Office'
 import Html from './components/Html'
+import LoadingScreen from './components/Loading'
 
-export default function App() {
+function OfficeCanvas() {
   return (
     <Canvas shadows={true} camera={{position: [1,2,0]}}>
       <color attach="background" args={['#000000']} />
@@ -23,5 +24,18 @@ export default function App() {
         <Html />
       </ScrollControls>
     </Canvas>
+  )
+}
+
+export default function App() {
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 3000)
+  }, [])
+
+  return (
+    loading ? <LoadingScreen /> : <OfficeCanvas />
   )
 }
