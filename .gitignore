@@ -202,3 +202,4 @@ frontend/*.ntvs*
 frontend/*.njsproj
 frontend/*.sln
 frontend/*.sw?
+frontend/node_modules/.package-lock.json
