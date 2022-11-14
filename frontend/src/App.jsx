@@ -7,7 +7,7 @@ import Html from './components/Html'
 export default function App() {
   return (
     <Canvas shadows={true} camera={{position: [1,2,0]}}>
-      <color attach="background" args={['#ffffff']} />
+      <color attach="background" args={['#000000']} />
       <spotLight 
         position={[1, 3, 0]} 
         angle={0.2} 
@@ -20,7 +20,7 @@ export default function App() {
       
       <ScrollControls pages={7}>
         <Office />
-        <ScrollHtml />
+        <Html />
       </ScrollControls>
     </Canvas>
   )
