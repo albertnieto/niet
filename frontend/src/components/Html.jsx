@@ -1,4 +1,6 @@
 import { useThree } from '@react-three/fiber'
+import { Scroll } from '@react-three/drei'
+
 
 function Home() {
 
