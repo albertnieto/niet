@@ -16,6 +16,8 @@ module.exports = {
       'careys-pink':'#D0A7BB',
       'cinder':'#100E1B',
       'logan':'#ABACD0',
+      'black12':'#121212',
+      'white':'#ffffff',
     },
     extend: {
       spacing: {
@@ -27,5 +29,5 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-font-inter')],
 }
