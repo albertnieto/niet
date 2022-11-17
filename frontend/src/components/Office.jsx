@@ -17,7 +17,7 @@ const cameraPositionCurve = new THREE.CatmullRomCurve3([
 
 const cameraLookAtCurve = new THREE.CatmullRomCurve3([
   new Vector3(0, 0, 0),
-  new Vector3(0, -1, 0),
+  new Vector3(0, 0, 0),
   new Vector3(0, 0, 0),
   new Vector3(0, 0, 0),
   new Vector3(0, 0, 0),
@@ -28,13 +28,13 @@ const cameraLookAt = new Vector3(0, 0, 0)
 
 export function OfficeCanvas() {
   return (
-    <Canvas shadows={true} camera={{position: [1,2,0]}}>
+    <Canvas frameloop="demand" shadows={true} camera={{position: [1,2,0]}}>
       <color attach="background" args={['#000000']} />
       <spotLight 
         position={[1, 3, 0]} 
-        angle={0.2} 
+        angle={1.0} 
         penumbra={0.7}
-        intensity={1.5}
+        intensity={1.2}
         castShadow
         shadow-mapSize-height={512}
         shadow-mapSize-width={512}
