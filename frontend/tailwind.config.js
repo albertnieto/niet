@@ -17,6 +17,7 @@ module.exports = {
       'cinder':'#100E1B',
       'logan':'#ABACD0',
       'black12':'#121212',
+      'white12':'#ededed',
       'white':'#ffffff',
     },
     extend: {
